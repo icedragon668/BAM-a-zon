@@ -1,1 +1,54 @@
-all'y'all made it!
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BAM!-a-zon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
+</head>
+<body>
+    <header><h6>faux header & nav</h6></header>
+    <main>
+        <h1>HERE BE STUFF</h1>
+        <p>home</p>
+        <p>check cart</p>
+        <div class="shopingList"> <!--why do i need (or think i do?) drops? //i think is a @#$%ing table-->
+            <div class="card" style="margin-bottom: 5px">
+                <input type="number">Qty
+                <div class="inStock">Stock</div>
+                <div class="productName">Name</div>
+                <div class="productPrice">Price</div>
+            </div>
+
+        </div>
+    </main>
+    <footer>"copyrite"</footer>
+    <div id="myModal" class="modal fade" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel"><strong>Checkout</strong></h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="shoppingCart">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/app.js"></script>
+</body>
+</html>

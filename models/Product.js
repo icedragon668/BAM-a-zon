@@ -15,14 +15,14 @@ module.exports = function(connection, Sequelize) {
             }
         },
         price: {
-            type: Sequelize.INT,
+            type: Sequelize.INTEGER,
             allowNull: false,
             validate: {
                 notEmpty: true
             }
         },
         stock_quantity: {
-            type: Sequelize.INT,
+            type: Sequelize.INTEGER,
             allowNull: false,
             validate: {
                 notEmpty: true

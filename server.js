@@ -1,5 +1,5 @@
 const express = require('express');
-const app = expres();
+const app = express();
 const PORT = process.env.PORT || 8080;
 const path = require('path');
 const db = require(path.join(__dirname, "./models"));
