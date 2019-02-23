@@ -78,3 +78,6 @@ let newA = [1, 2].map(function (e) {
 })
 
 console.log(newA)
+
+/// what? ///
+return student.name.startsWith('J') ? student.name + " is cool" : student.name

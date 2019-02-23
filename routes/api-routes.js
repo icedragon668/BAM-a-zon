@@ -11,6 +11,17 @@ module.exports = function(app) {
             res.json({error: error});
         });
     });
+
+    app.put('/api/products', function(req,res){
+        db.Product.update({
+            //anything else?
+        }).then(function(data){
+            res.json(data);
+        }).catch(function(error){
+            res.json({error: error});
+        });
+    });
     //app.post ?
     //app.put
+
 }
