@@ -1,27 +1,21 @@
 const db = require("../models");
 const path = require('path');
 
-module.exports = function(app) {
-    app.get('/api/products', function(req,res){
+module.exports = function (app) {
+    app.get('/api/products', function (req, res) {
         db.Product.findAll({
-            //anything else?
-        }).then(function(data){
+        }).then(function (data) {
             res.json(data);
-        }).catch(function(error){
-            res.json({error: error});
+        }).catch(function (error) {
+            res.json({ error: error });
         });
     });
 
-    app.put('/api/products', function(req,res){
-        db.Product.update({
-            //anything else?
-        }).then(function(data){
-            res.json(data);
-        }).catch(function(error){
-            res.json({error: error});
-        });
-    });
-    //app.post ?
-    //app.put
-
+    app.put('/api/products', function (req, res) { 
+            db.Product.update(
+                { stock_quantity: Object.values(req.body) }, /* set attributes' value */
+                { where: { id: Object.keys(req.body) } } /* where criteria */
+             ).then(function () { res.json() })
+        })
+    
 }

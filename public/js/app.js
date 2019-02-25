@@ -1,5 +1,6 @@
-const render = function (inventory) { //@#$%
+const render = function (inventory) {
     $('table').html(inventory)
+    console.log("inv set")
 }
 const inventory = function () {
     $('table').html('')
@@ -37,7 +38,7 @@ const inventory = function () {
 
 inventory()
 
-const getLocalVal = function () {  //needs to be switched to dynamic //i think i'm dying >.<
+const getLocalVal = function () {  //needs to be switched to dynamic //also validate against negatives
     const scores = [
         Number($('#item1').val()),
         Number($('#item2').val()),
@@ -76,7 +77,6 @@ const validate = function () {
         for (i = 0; i < res.length; i++) {
             availStock.push(Number(res[i].stock_quantity))
         };
-    console.log("what is this?", Object.values(availStock))
     let notOk = 0
     for (i = 0; i < reqStock.length; i++) {
         if (availStock[i] >= reqStock[i]) {
@@ -86,7 +86,7 @@ const validate = function () {
     }
     if (notOk == 0) {
         $('#error').hide();
-        getPrice(reqStock)  //error should be dynmic
+        getPrice(reqStock)
     } else {
         $('#error').show()
     }
@@ -120,27 +120,13 @@ const checkout = function (itemPrice, reqStock) {
 const onClick = function (e) {
     e.preventDefault();
     validate()
-    // getStock()
 }
 
 const stockUpdate = function (e) {
     e.preventDefault();
-    //clear input
-    // $('#item1').val('')
-    // $('#item2').val('')
-    // $('#item3').val('')
-    // $('#item4').val('')
-    // $('#item5').val('')
-    // $('#item6').val('')
-    // $('#item7').val('')
-    // $('#item8').val('')
-    // $('#item9').val('')
-    // $('#item10').val('')
 
-    //setup put request
     let reqStock = getLocalVal()
     
-    //get the @#$%ING unusable array
     const stockUpdate = []
     $.ajax({
         url: '/api/products',
@@ -148,16 +134,39 @@ const stockUpdate = function (e) {
     }).then(function (res) {
         for (i = 0; i < res.length; i++) {
             stockUpdate.push(Number(res[i].stock_quantity - reqStock[i]))
-        };
+        };  
+        for (i = 0; i < 10; i++) {
+            idi = (i + 1)
+            const ajaxObj = {
+                idi: stockUpdate[i],
+            }
+            let key = Object.keys(ajaxObj);
+            if (key !== idi) {
+                Object.defineProperty(ajaxObj, idi,
+                    Object.getOwnPropertyDescriptor(ajaxObj, key));
+                delete ajaxObj[key];
+            }    
         $.ajax({
             url: '/api/products',
-            method: 'PUT'
+            method: 'PUT',
+            data: ajaxObj
         }).then(function (req,res){
-
-        console.log(stockUpdate)
         })
+    }
     })
-    console.log(reqStock[0])
+    //clear input
+    $('#item1').val('')
+    $('#item2').val('')
+    $('#item3').val('')
+    $('#item4').val('')
+    $('#item5').val('')
+    $('#item6').val('')
+    $('#item7').val('')
+    $('#item8').val('')
+    $('#item9').val('')
+    $('#item10').val('')
+    
+    inventory() //runs too soon, settimeout not working?
 }
 
 $('#error').hide()
