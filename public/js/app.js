@@ -167,6 +167,7 @@ const stockUpdate = function (e) {
     $('#item10').val('')
     
     inventory() //runs too soon, settimeout not working?
+    location.reload()
 }
 
 $('#error').hide()
