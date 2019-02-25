@@ -63,11 +63,11 @@ const getStock = function () {
         for (i = 0; i < res.length; i++) {
             availStock.push(Number(res[i].stock_quantity))
         };
-        return( availStock) 
+        return (availStock)
     })
 }
 
-const validate = function () { 
+const validate = function () {
     let reqStock = getLocalVal()
     const availStock = []
     $.ajax({
@@ -77,20 +77,21 @@ const validate = function () {
         for (i = 0; i < res.length; i++) {
             availStock.push(Number(res[i].stock_quantity))
         };
-    let notOk = 0
-    for (i = 0; i < reqStock.length; i++) {
-        if (availStock[i] >= reqStock[i]) {
-        } else {
-            notOk++
+        let notOk = 0
+        for (i = 0; i < reqStock.length; i++) {
+            if (availStock[i] >= reqStock[i]) {
+            } else {
+                notOk++
+            }
         }
-    }
-    if (notOk == 0) {
-        $('#error').hide();
-        getPrice(reqStock)
-    } else {
-        $('#error').show()
-    }
-})}
+        if (notOk == 0) {
+            $('#error').hide();
+            getPrice(reqStock)
+        } else {
+            $('#error').show()
+        }
+    })
+}
 
 const getPrice = function (reqStock) {
     const itemPrice = []
@@ -126,7 +127,7 @@ const stockUpdate = function (e) {
     e.preventDefault();
 
     let reqStock = getLocalVal()
-    
+
     const stockUpdate = []
     $.ajax({
         url: '/api/products',
@@ -134,7 +135,7 @@ const stockUpdate = function (e) {
     }).then(function (res) {
         for (i = 0; i < res.length; i++) {
             stockUpdate.push(Number(res[i].stock_quantity - reqStock[i]))
-        };  
+        };
         for (i = 0; i < 10; i++) {
             idi = (i + 1)
             const ajaxObj = {
@@ -145,14 +146,14 @@ const stockUpdate = function (e) {
                 Object.defineProperty(ajaxObj, idi,
                     Object.getOwnPropertyDescriptor(ajaxObj, key));
                 delete ajaxObj[key];
-            }    
-        $.ajax({
-            url: '/api/products',
-            method: 'PUT',
-            data: ajaxObj
-        }).then(function (req,res){
-        })
-    }
+            }
+            $.ajax({
+                url: '/api/products',
+                method: 'PUT',
+                data: ajaxObj
+            }).then(function (req, res) {
+            })
+        }
     })
     //clear input
     $('#item1').val('')
@@ -165,7 +166,7 @@ const stockUpdate = function (e) {
     $('#item8').val('')
     $('#item9').val('')
     $('#item10').val('')
-    
+
     // inventory() //runs too soon, settimeout not working?
     location.reload(false)
 }
